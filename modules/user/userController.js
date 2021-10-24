@@ -6,7 +6,8 @@ const User = require("./userModel");
 
 exports.auth = async (req, res, next) => {
   //   res.status(200).json({ message: "Working route" });
-  const { accessToken } = req.params;
+  const { accessToken } = req.query;
+  console.log(accessToken);
   const provider = "Google";
   try {
     let userInfo = await getUserDetailsFromOAuth(provider, accessToken);
