@@ -94,7 +94,7 @@ const getMarvelContent = async (page, limit) => {
   // console.log(events);
 
   const marvelArray = events.map((ev) => {
-    return { type: "marvel", ...ev };
+    return { dataType: "marvel", ...ev };
   });
 
   return marvelArray;
