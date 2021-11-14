@@ -30,7 +30,7 @@ exports.feed = async (req, res, next) => {
     const animeArray = await getAnime();
 
     feedArray.push(
-      quotesArray,
+      ...quotesArray,
       jokesArray1,
       jokesArray2,
       rickmortyArray1,
@@ -64,10 +64,10 @@ const getQuotes = async () => {
   );
 
   // console.log(response.data);
-  const quotesArray = {
-    dataType: "quotes",
-    ...response.data,
-  };
+  const quotesArray = response.data.map((qt) => {
+    return { dataType: "quotes", ...qt };
+  });
+
   return quotesArray;
 };
 
