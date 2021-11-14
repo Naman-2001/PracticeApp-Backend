@@ -64,7 +64,7 @@ const getQuotes = async () => {
   );
 
   // console.log(response.data);
-  const quotesArray = response.data.map((qt) => {
+  const quotesArray = response.data.results.map((qt) => {
     return { dataType: "quotes", ...qt };
   });
 
