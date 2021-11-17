@@ -4,7 +4,7 @@ const axios = require("axios");
 
 exports.feed = async (req, res, next) => {
   // and array that contains different dataTypes of data to be sent
-  const feedArray = [];
+  let feedArray = [];
 
   try {
     // Fetch News
@@ -39,10 +39,24 @@ exports.feed = async (req, res, next) => {
       ...animeArray,
       ...marvelArray
     );
+    feedArray = shuffle(feedArray);
     return res.status(200).json({ feed: feedArray });
   } catch (error) {
     next(error);
   }
+};
+
+//Fisher Yates Algorithm to shuffle an algorithm
+//How it works: Traverse the array in reverse and swap an element with any random element before it
+
+const shuffle = (array) => {
+  let len = array.length;
+  for (let i = len - 1; i >= 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
+  return array;
 };
 
 const getNews = async () => {
