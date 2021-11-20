@@ -17,7 +17,7 @@ exports.feed = async (req, res, next) => {
     const jokesArray2 = await getJokes();
 
     // //Fetch Marvel events //2
-    const marvelArray = await getMarvelContent(1, 2);
+    const marvelArray = await getMarvelContent(2);
 
     //Fetch Rick and Morty //2
     const rickmortyArray1 = await getRickandMorty();
@@ -39,6 +39,8 @@ exports.feed = async (req, res, next) => {
       ...animeArray,
       ...marvelArray
     );
+
+    //shuffle the array
     feedArray = shuffle(feedArray);
     return res.status(200).json({ feed: feedArray });
   } catch (error) {
@@ -73,12 +75,16 @@ const getNews = async () => {
 };
 
 const getQuotes = async () => {
+  const page = getRandomNumber(1, 10);
+  // const response = await axios.get(
+  //   `https://api.quotable.io/quotes?page=${page}&limit=3`
+  // );
+
   const response = await axios.get(
-    "https://api.quotable.io/quotes?page=1&limit=3"
+    `https://goquotes-api.herokuapp.com/api/v1/random?count=3`
   );
 
-  // console.log(response.data);
-  const quotesArray = response.data.results.map((qt) => {
+  const quotesArray = response.data.quotes.map((qt) => {
     return { dataType: "quotes", ...qt };
   });
 
@@ -97,7 +103,8 @@ const getJokes = async () => {
   return jokesArray;
 };
 
-const getMarvelContent = async (page, limit) => {
+const getMarvelContent = async (limit) => {
+  const page = getRandomNumber(1, 36);
   const offset = page * limit;
 
   const response = await axios.get(
