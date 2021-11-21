@@ -13,8 +13,8 @@ exports.feed = async (req, res, next) => {
     //Fetch Quotes //3
     const quotesArray = await getQuotes();
     // //Fetch Jokes //2
-    const jokesArray1 = await getJokes();
-    const jokesArray2 = await getJokes();
+    // const jokesArray1 = await getJokes();
+    // const jokesArray2 = await getJokes();
 
     // //Fetch Marvel events //2
     const marvelArray = await getMarvelContent(2);
@@ -31,8 +31,8 @@ exports.feed = async (req, res, next) => {
 
     feedArray.push(
       ...quotesArray,
-      jokesArray1,
-      jokesArray2,
+      // jokesArray1,
+      // jokesArray2,
       rickmortyArray1,
       rickmortyArray2,
       ...streamArray,
@@ -44,6 +44,7 @@ exports.feed = async (req, res, next) => {
     feedArray = shuffle(feedArray);
     return res.status(200).json({ feed: feedArray });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
