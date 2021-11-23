@@ -86,7 +86,12 @@ const getQuotes = async () => {
   );
 
   const quotesArray = response.data.quotes.map((qt) => {
-    return { dataType: "quotes", ...qt };
+    return {
+      dataType: "quotes",
+      content: qt.text,
+      author: qt.author,
+      tagL: qt.tag,
+    };
   });
 
   return quotesArray;
