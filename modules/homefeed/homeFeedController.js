@@ -165,9 +165,9 @@ const getStreams = async () => {
   };
 
   const response = await axios.request(options);
-  const ind1 = getRandomNumber(8, 1);
-  let ind2 = getRandomNumber(8, 1);
-  if (ind1 == ind2) ind2 = getRandomNumber(8, 1);
+  const ind1 = getRandomNumber(1, 8);
+  let ind2 = getRandomNumber(1, 8);
+  if (ind1 == ind2) ind2 = getRandomNumber(1, 8);
 
   const streamArray = [
     {
